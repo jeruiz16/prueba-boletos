@@ -2,7 +2,7 @@ function loadClient(){
     $('#clientId').val('');
     var documentId = $('#document').val();
     $.ajax( {
-        url: 'http://127.0.0.1:8000/api/clients/'+documentId,
+        url: 'http://ec2-18-222-175-185.us-east-2.compute.amazonaws.com//api/clients/'+documentId,
         dataType: 'json',
         success: function(data) {
             if (data.code == 201) {
@@ -64,7 +64,7 @@ function listReservations() {
     }
     $('#reservationsTable').DataTable({
         "ajax": {
-            url: 'http://127.0.0.1:8000/api/reservations/ByClient/'+document,
+            url: 'http://ec2-18-222-175-185.us-east-2.compute.amazonaws.com//api/reservations/ByClient/'+document,
             dataType: 'json'
         },
         "columns": [
@@ -83,7 +83,7 @@ function listReservations() {
 function listClientsTable() {
     $('#clientsTable').DataTable({
         "ajax": {
-            url: 'http://127.0.0.1:8000/api/clients/',
+            url: 'http://ec2-18-222-175-185.us-east-2.compute.amazonaws.com//api/clients/',
             dataType: 'json'
         },
         "columns": [

@@ -1,6 +1,6 @@
 function loadReservation(id){
     $.ajax( {
-        url: 'http://127.0.0.1:8000/api/events/'+id,
+        url: 'http://ec2-18-222-175-185.us-east-2.compute.amazonaws.com//api/events/'+id,
         dataType: 'json',
         success: function(data) {
             if (data.code == 201) {
@@ -29,7 +29,7 @@ function storeReservation(){
     if($('#clientId').val() == ''){
         $.ajax( {
             method: "POST",
-            url: 'http://127.0.0.1:8000/api/clients',
+            url: 'http://ec2-18-222-175-185.us-east-2.compute.amazonaws.com//api/clients',
             dataType: 'json',
             data: {
                 "firstname" : $('#firtsname').val(),
@@ -56,7 +56,7 @@ function storeReservation(){
 function saveReservation(){
     $.ajax( {
         method: "POST",
-        url: 'http://127.0.0.1:8000/api/reservations',
+        url: 'http://ec2-18-222-175-185.us-east-2.compute.amazonaws.com//api/reservations',
         dataType: 'json',
         data: {
             "client_id" : $('#clientId').val(),

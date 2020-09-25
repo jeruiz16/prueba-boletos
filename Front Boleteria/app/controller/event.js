@@ -1,6 +1,6 @@
 function listEvents(){
     $.ajax( {
-        url: 'http://127.0.0.1:8000/api/events',
+        url: 'http://ec2-18-222-175-185.us-east-2.compute.amazonaws.com//api/events',
         dataType: 'json',
         success: function(data) {
             if (data.code == 200) {
@@ -34,7 +34,7 @@ function listEvents(){
 function listEventsTable() {
     $('#eventsTable').DataTable({
         "ajax": {
-            url: 'http://127.0.0.1:8000/api/events/',
+            url: 'http://ec2-18-222-175-185.us-east-2.compute.amazonaws.com//api/events/',
             dataType: 'json'
         },
         "columns": [
@@ -50,7 +50,7 @@ function listEventsTable() {
 function storeEvent() {
     $.ajax( {
         method: "POST",
-        url: 'http://127.0.0.1:8000/api/events',
+        url: 'http://ec2-18-222-175-185.us-east-2.compute.amazonaws.com//api/events',
         dataType: 'json',
         data: {
             "name" : $('#name').val(),
