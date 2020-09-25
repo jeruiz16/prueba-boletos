@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <title>Reserva Boletos</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+        <link href="app/assets/css/style.css" rel="stylesheet" />
+        <link href="app/assets/css/home.css" rel="stylesheet" />
+    
+    </head>
+    <body>
+        <div class="loader"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Reserva de boletos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Eventos y Reservas <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="eventos.html">Administrar Eventos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="clientes.html">Administrar Clientes</a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="app">
+        <div class='container'>
+            
+            <div class='page-header'>
+                <h1 id='page-title'>Eventos disponibles</h1>
+            </div>
+
+            <div id='page-content'>
+                <fieldset>
+                    <div class="row" id="targeCarousel">
+    
+                    </div>
+                </fieldset>
+                <hr/>
+                <fieldset>
+                    <legend>Consulta tu reserva</legend>
+                    <div class="row">
+                        <div class="md-form active-cyan active-cyan-2">
+                            <input class="form-control" type="text" id="searchDocument" placeholder="Numero de documento" aria-label="Search">
+                        </div>
+                        <div class="md-3">
+                            <button type="button" id="search" class="btn btn-success" onclick="listReservations();">Consultar Reserva</button>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row d-none" id="searchReservation">
+                        <table id="reservationsTable" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Codigo Evento</th>
+                                    <th>Nombre Evento</th>
+                                    <th>Fecha Evento</th>
+                                    <th>Codigo Boleta</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Codigo Evento</th>
+                                    <th>Nombre Evento</th>
+                                    <th>Fecha Evento</th>
+                                    <th>Codigo Boleta</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </fieldset>
+                
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal center" >
+                <fieldset>
+                    
+                    <!-- Form Name -->
+                    <legend>Reserva</legend>
+                    
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="type_document">Tipo de documento</label>
+                        <div class="col-md-12">
+                        <select id="type_document" name="type_document" class="form-control">
+                            <option value="CC">CC</option>
+                            <option value="CE">CE</option>
+                            <option value="PE">PE</option>
+                        </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-12 control-label" for="document">Numero de documento</label>  
+                        <div class="col-md-12">
+                        <input id="document" name="document" type="text" placeholder="Numero de documento" class="form-control input-md" required="">
+                        <input id="clientId" name="clientId" type="text"  class="d-none">
+                        <input id="eventId" name="eventId" type="text"  class="d-none">
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group d-none">
+                        <label class="col-md-12 control-label" for="firtsname">Nombres</label>  
+                        <div class="col-md-12">
+                        <input id="firtsname" name="firtsname" type="text" placeholder="Nombres" class="form-control input-md" required="">
+                        </div>
+                    </div>
+                    
+                    <!-- Text input-->
+                    <div class="form-group d-none">
+                        <label class="col-md-12 control-label" for="lastname">Apellidos</label>  
+                        <div class="col-md-12">
+                        <input id="lastname" name="lastname" type="text" placeholder="Apellidos" class="form-control input-md" required="">
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Text input-->
+                    <div class="form-group d-none">
+                        <label class="col-md-12 control-label" for="celphone">Celular</label>  
+                        <div class="col-md-12">
+                        <input id="celphone" name="celphone" type="text" placeholder="Celular" class="form-control input-md" required="">
+                        </div>
+                    </div>
+                    
+                    <!-- Select Basic -->
+                    <div class="form-group d-none">
+                        <label class="col-md-12 control-label" for="quantity">Cantidad de boletas</label>
+                        <div class="col-md-12">
+                        <select id="quantity" name="quantity" class="form-control">
+                        </select>
+                        </div>
+                    </div>
+                    
+                    </fieldset>
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clearForm();">Cancelar</button>
+            <button type="button" id="consultar" class="btn btn-primary" onclick="loadClient();">Consultar Documento</button>
+            <button type="button" id="reservar" class="btn btn-success d-none" onclick="storeReservation();">Hacer Reserva</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controller/client.js"></script>
+    <script src="app/controller/reservation.js"></script>
+    <script src="app/controller/event.js"></script>
+    <script src="app/assets/js/multicarousel.js"></script>
+    <script type="text/javascript">
+        $(window).on('load', function() { $(".loader").fadeOut("slow"); });
+    </script>
+    </body>
+</html>
